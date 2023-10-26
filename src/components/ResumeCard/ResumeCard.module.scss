@@ -1,0 +1,76 @@
+.resumeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgb(232, 221, 221);
+  padding: 1rem;
+  border-radius: .5rem;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &_quality {
+      background-color: green;
+      border-radius: 10rem;
+      padding: .5rem;
+      color: white;
+    }
+    &_title {
+      font-size: .75rem;
+      opacity: .75;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    &_block {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+  }
+
+  &__skillSet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    &_skill {
+      font-size: .75rem;
+      border: 1px solid rgb(201, 232, 201);
+      padding: .25rem;
+      border-radius: 5rem;
+    }
+  }
+
+  &__experience {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    &_card {
+      background-color: rgb(245, 245, 245);
+      padding: .5rem;
+      border-radius: .5rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    &_button{
+      font-size: 1.25rem;
+      border: 0;
+      background-color: transparent;
+      padding: .5rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: rgb(0, 189, 0);
+    }
+    & :first-child {
+      color: rgb(255, 94, 94);
+    }
+  }
+}
