@@ -1,13 +1,25 @@
-import { Experience, Resume } from '@/models/resume'
+'use client'
+import { Experience, Resume, Status } from '@/models/resume'
 import styles from './ResumeCard.module.scss'
+import { useResumeStore } from '@/stores/resumeStore'
 
 interface Props {
   resume: Resume
+  state?: Status
 }
-const ResumeCard = ({ resume }: Props) => {
+const ResumeCard = ({ resume, state }: Props) => {
+  const { acceptHr, acceptManager, reject } = useResumeStore()
   const experience: Experience[] = JSON.parse(resume.experience)
+
+  const handleAccept = (id: number): void => {
+    if (!state) {
+      acceptHr(id)
+    } else if (state === 'management') {
+      acceptManager(id)
+    }
+  }
   return (
-    <div className={styles.resumeCard}>
+    <div className={styles.resumeCard} key={resume.id}>
       <div className={styles.resumeCard__head}>
         <div>
           <h3>{resume.first_name ?? 'Ivan'} {resume.last_name ?? 'Ivanov'}, {resume.age}</h3>
@@ -25,21 +37,23 @@ const ResumeCard = ({ resume }: Props) => {
           </div>
         </div>
         <div className={styles.resumeCard__content_block}>
-          <h4>Experience:</h4>
+          <h4>Last work:</h4>
           <div className={styles.resumeCard__experience}>
-            {experience.map((exp, i) =>
+
               <div className={styles.resumeCard__experience_card}>
-                <h5>{exp.company}</h5>
-                <h6>{exp.start} - {exp.end}</h6>
+                <h5>{experience[0].company}</h5>
+                <h6>{experience[0].start} - {experience[0].end}</h6>
               </div>
-            )}
+
           </div>
         </div>
       </div>
-      <div className={styles.resumeCard__actions}>
-        <button className={styles.resumeCard__actions_button}>reject</button>
-        <button className={styles.resumeCard__actions_button}>accept</button>
+      {state !== 'accepted' &&
+        <div className={styles.resumeCard__actions}>
+        <button className={styles.resumeCard__actions_button} onClick={() => reject(resume.id)}>reject</button>
+        <button className={styles.resumeCard__actions_button} onClick={() => handleAccept(resume.id)}>accept</button>
       </div>
+      }
     </div>
   )
 }

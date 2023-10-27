@@ -1,8 +1,9 @@
 export type Status = 'hr' | 'management' | 'accepted' | 'rejected'
 
 export interface Resume {
-  id: number
   quality: number
+  status: Status
+  id: number
   first_name: any
   last_name: any
   middle_name: any
