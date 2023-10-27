@@ -8,7 +8,7 @@ const AcceptedList = () => {
   return (
     <>
       {accepted.map((res) =>
-        <ResumeCard resume={res} key={res.id}/>
+        <ResumeCard resume={res} key={res.id} state='accepted'/>
       )}
     </>
   )
